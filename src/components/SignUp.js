@@ -1,10 +1,12 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
-import {auth} from './'
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../config/firebaseConfig'
+ import { useNavigate } from "react-router-dom";
 import './css/signup.css'
 
 export default function SignUp(){
+    const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -12,10 +14,24 @@ export default function SignUp(){
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+                console.log('signup sucess:'+ email + " " + password)
+                // Signed in 
+                const user = userCredential.user;
+                console.log('userCreated Sucess')
+                // ...
+                navigate('/signup-login/login')
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error('userCreated failed')
+                // ..
+            });
     }
 
-
+ 
     return (
         <div className="form-container">
             <form className="signup" onSubmit={handleSubmit}>
@@ -54,7 +70,7 @@ export default function SignUp(){
                 <button type="submit">SignUp</button>
             </form>
             <p>Already Have an Account?
-                <span><Link to="">LogIn</Link></span>
+                <span><Link to="/signup-login/login">LogIn</Link></span>
             </p>
       </div>
     );
