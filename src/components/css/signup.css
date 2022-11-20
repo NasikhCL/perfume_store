@@ -1,0 +1,33 @@
+.form-container{
+    margin: 30px auto;
+    padding:20px 0px;
+    border-radius: 9px;
+    width: 320px;
+    height: auto;
+    background-color: #097969;
+    text-align: center;
+    box-sizing: border-box;
+
+}
+.signup input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+    /* background-color:; */
+}
+.signup button{
+    background-color: transparent;
+    border: 1px solid white;
+    width: 100px;
+    height: 30px;
+    color: white;
+    font-size: 13px;
+    border-radius: 5px;
+}
+.signup button:hover{
+    background-color: white;
+    color:#097969;
+    font-weight: 600;
+}
