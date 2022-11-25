@@ -1,19 +1,13 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import './css/navbar.css'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Cart from "./Cart";
+// import Cart from "./Cart";
 export default function Navbar(){
 
     const isLoggedIn = useSelector((state)=> state.isUserLoggedIn.isUserLogin)
     console.log(isLoggedIn)
-    useEffect(()=>{
-        setCurrentPage('home')
-    },[isLoggedIn])
-   const [currentPage, setCurrentPage] = useState('home')
-    function isActice(Cpage){
-        setCurrentPage(Cpage)
-    }
+   
  
     return(
         <div className="navbar">
@@ -21,14 +15,14 @@ export default function Navbar(){
                 <img className="logo-img" src="https://digipplus.com/static/homepage/imgs/digipplus-logo-70x70.38a25d5cef0d.png" alt="logo"/>
                 <h2 className="app-title">Perfume Store</h2>
                 <ul>
-                    <Link to="/"><li className={(currentPage === 'home') ? 'select': ''} onClick={()=>isActice('home')}>HOME</li></Link>  
+                    <NavLink to="/">{({ isActive }) => <li className={ isActive ? 'select' : 'not-select' }>HOME</li>}</NavLink>  
+                    <NavLink to="/cart">{({ isActive }) => <li className={ isActive ? 'select' : 'not-select' }>Cart</li>}</NavLink> 
                 {
                     isLoggedIn ? 
-                    <>
-                        <Link to="/"><li className={(currentPage === 'cart') ? 'select': ''} onClick={()=>isActice('cart')}><Cart /></li></Link> 
-                        <li className={(currentPage === 'logout') ? 'select': ''} onClick={()=>isActice('logout')} >LogOut</li> 
-                    </> :
-                    <Link to="/signup-login"><li className={(currentPage === 'signup') ? 'select': ''} onClick={()=>isActice('signup')}>SignUp/LogIn</li></Link>
+                    <Fragment>
+                        <NavLink to="/products"> {({ isActive }) => <li className={ isActive ? 'select' : 'not-select' }>LogOut</li>}</NavLink>
+                    </Fragment> :
+                    <NavLink to="/signup-login/signup">{({ isActive }) => <li className={ isActive ? 'select' : 'not-select' }>SignUp/LogIn</li>}</NavLink>
                   
                 }
                 </ul>
@@ -37,3 +31,6 @@ export default function Navbar(){
         </div>
     )
 }
+
+
+// className={({ isActive }) => isActive ? activeClassName : undefined } >

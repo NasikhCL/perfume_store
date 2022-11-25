@@ -1,7 +1,7 @@
 
-a{
-    color: #696969;
-}
+/* a{
+    color: brown;
+} */
 nav{
     /* padding-left: 5%; */
 
@@ -13,6 +13,7 @@ nav{
     align-items: center;
     box-shadow:0px 3px 3px #e0dede;
     /* font-size: 26px; */
+    color:grey;
     /* justify-content: ; */
     
 }
@@ -33,13 +34,17 @@ nav{
     align-self: center;
     width: 300px;
     /* outline: auto;     */
-    color: #696969;
+    color: grey;
     list-style: none;
     display: flex;
     justify-content: space-between;
     font-size: 18px;
     font-weight: 600;
 } 
+.not-select{
+    color:grey
+}
+
 
 .navbar ul li:hover{
     cursor: pointer;
@@ -49,8 +54,8 @@ nav{
 
 .select{
     color:#097969;
-    text-decoration: underline;
-    text-decoration-thickness: 5px;
+    border-bottom: 5px solid #097969;
+
 }
 
 .user-profile{

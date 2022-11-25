@@ -7,18 +7,30 @@
     border-radius: 3px;
     color: white;
 }
+
 .reg .signup{
     /* background-color: lightblue; */
     width: 49%;
     height: inherit;
     text-align: center;
     display: inline-block;
-    border-right:2px solid white ;
+    color:grey;
+    /* border-right:2px solid white ; */
 }
 .reg .login{
     display: inline-block;
     width: 49%;
     text-align: center;
     height: inherit;
-    border-left: 2px solid white ;
+    color: grey;
+    /* border-left: 2px solid white ; */
+}
+.current{
+    width: 49%;
+    height: inherit;
+    text-align: center;
+    display: inline-block;
+    color:white;
+    border-bottom: 5px solid white;
+    
 }

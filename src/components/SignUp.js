@@ -1,27 +1,48 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../config/firebaseConfig'
- import { useNavigate } from "react-router-dom";
+import {auth} from '../config/firebaseConfig';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../config/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 import './css/signup.css'
+
 
 export default function SignUp(){
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
+    const [emailId, setEmailId] = useState("");
     const [password, setPassword] = useState("");
+    const [phone, setPhone] = useState('')
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-                console.log('signup sucess:'+ email + " " + password)
+        createUserWithEmailAndPassword(auth, emailId, password)
+        .then(async (userCredential) =>  {
+                // console.log('signup sucess:'+ email + " " + password)
                 // Signed in 
                 const user = userCredential.user;
+
                 console.log('userCreated Sucess')
-                // ...
-                navigate('/signup-login/login')
+                try {
+                    const docRef = await addDoc(collection(db, "users"), {
+                      fname: firstName,
+                      lname: lastName,
+                      email: emailId,
+                      cart: [],
+                      mobile: phone
+
+                     
+                    });
+                    console.log("Document written with ID: ", docRef.id);
+
+                    navigate('/signup-login/login')
+
+                  } catch (e) {
+                    console.error("Error adding document: ", e);
+                  }
+               
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -52,8 +73,8 @@ export default function SignUp(){
                 required
                 />
                 <input
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                value={emailId}
+                onChange={e => setEmailId(e.target.value)}
                 placeholder="Email address"
                 type="email"
                 name="email"
@@ -65,6 +86,14 @@ export default function SignUp(){
                 placeholder="Password"
                 type="password"
                 name="password"
+                required
+                />
+                <input
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
+                placeholder="phone number"
+                type="tele"
+                name="phone"
                 required
                 />
                 <button type="submit">SignUp</button>
