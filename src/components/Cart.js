@@ -5,6 +5,9 @@ import { db } from "../config/firebaseConfig";
 export default function Cart(){
     // const[cart, setCart] = useState([])
     return(
-        <div>Cart</div>
+        <div>
+            <div className="cart-add-remove-product"></div>
+        </div>
+
     )
 }

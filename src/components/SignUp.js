@@ -23,10 +23,12 @@ export default function SignUp(){
                 // console.log('signup sucess:'+ email + " " + password)
                 // Signed in 
                 const user = userCredential.user;
+                
 
-                console.log('userCreated Sucess')
+                console.log('userCreated Sucess:'+ (userCredential.user.uid))
                 try {
                     const docRef = await addDoc(collection(db, "users"), {
+                      id: userCredential.user.uid,
                       fname: firstName,
                       lname: lastName,
                       email: emailId,

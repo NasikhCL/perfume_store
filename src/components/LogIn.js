@@ -13,23 +13,23 @@ export default function LogIn(){
     const [password, setPassword] = useState("");
     const handleSubmit = (e)=> {
         e.preventDefault();
-        navigate('/')
         // console.log('login sucess')
         dispatch(loginStatus())
-        // signInWithEmailAndPassword(auth, email, password)
-        //     .then((userCredential) => {
-        //         // Signed in 
-        //         // const user = userCredential.user;
-        //         console.log('looginneddd')
-        //         // ... 
-        //         dispatch(loginStatus())
-        //         // navigate('/')
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-        //         console.log( 'error in login')
-        //     });
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            // const user = userCredential.user;
+            console.log('looginneddd')
+            // ... 
+            dispatch(loginStatus())
+            navigate('/')
+                // navigate('/')
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log( 'error in login')
+            });
     }
 
 
